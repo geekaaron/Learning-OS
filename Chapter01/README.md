@@ -18,7 +18,7 @@ Typical lower memory layout after boot (referenced by **Writing a Simple Operati
 
 ![](./Pictures/memory0.png)
 
-You can download this book, get more OS development resources form my github
+You can download this book, get more OS development resources from my github
 [https://github.com/geekaaron/Resources](https://github.com/geekaaron/Resources)
 
 Now we can write a simple boot sector by at&t assembly that just perform an endless loop.
