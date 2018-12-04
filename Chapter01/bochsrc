@@ -1,0 +1,4 @@
+
+# bochs configuration file for run boot sector
+floppya: 1_44 = "./image", status = inserted
+boot: floppy
