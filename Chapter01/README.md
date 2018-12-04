@@ -71,7 +71,7 @@ $ qemu-system-i386 -boot a -fda image
 
 + -Ttext 0 - specify the text section start at 0
 + -e _bootsect - entry point is _bootsect
-+ -m elf_i386 - 
++ -m elf_i386 - elf i386 target
 + -s - strip all symbol information from output file
 + -o - output file
 
