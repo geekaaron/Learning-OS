@@ -28,11 +28,11 @@ Now we assume that we want to read the first sector after the boot sector (i.e. 
 load_demo:
 	mov $0x9000, %ax	# Use ax register to change es segment register
 	mov %ax, %es		# Set es to the segment of demo
-	mov $0, %bx			# bx=0 -> offset=0; es:bx -> 0x9000:0000 = 0x90000
+	mov $0, %bx		# bx=0 -> offset=0; es:bx -> 0x9000:0000 = 0x90000
 	mov $0x0200+1, %ax	# int=0x13/ah=0x02 -> Read disk sectors; al=1 -> Read 1 sector
 	mov $0x0002, %cx	# ch=0 -> Cylinder 0; cl=2 -> sector number 2
 	mov $0x0000, %dx	# dh=0 -> head number 0; dl=0 -> drive number 0 (floppy disk)
-	int $0x13			# Read 1 sector from 0-0-2 (CHS) in floppy to 0x90000
+	int $0x13		# Read 1 sector from 0-0-2 (CHS) in floppy to 0x90000
 ```
 
 But how do we know if we actually read the sector from floppy disk? BIOS will updates some register after interrupt routine to let us know what happend:
@@ -45,13 +45,13 @@ So do some simple check after read the disk, as detailed in next code sinppet.
 ```
 	jc reset_disk		# Read failed if cf=1
 
-	cmp $1, %al			# if al (number of sectors actually read) = 1 (we need to read)
+	cmp $1, %al		# if al (number of sectors actually read) = 1 (we need to read)
 	je load_demo_done	# demo load successful
 
 reset_disk:
-	mov $0, %ah			# int=0x13/ah=0 -> Reset disk system
-	mov $0, %dl			# dl=0 -> drive number 0 (floppy disk)
-	int $0x10			# Reset disk stat
+	mov $0, %ah		# int=0x13/ah=0 -> Reset disk system
+	mov $0, %dl		# dl=0 -> drive number 0 (floppy disk)
+	int $0x10		# Reset disk stat
 	jmp load_demo		# Load demo again
 
 ```
